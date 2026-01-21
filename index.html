@@ -1,137 +1,548 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakan | Meme Creator</title>
+    <title>Hakan | Meme Creator & GIF Artist</title>
+    <meta name="description" content="Hakan - Meme Creator & GIF Artist from Turkey. Creating viral memes, GIFs and stickers.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%); color: #ffffff; min-height: 100vh; overflow-x: hidden; }
-        .bg-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .bg-animation span { position: absolute; width: 20px; height: 20px; background: rgba(255, 255, 255, 0.05); animation: float 25s infinite; border-radius: 50%; }
-        .bg-animation span:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .bg-animation span:nth-child(2) { left: 20%; animation-delay: 2s; width: 30px; height: 30px; }
-        .bg-animation span:nth-child(3) { left: 35%; animation-delay: 4s; }
-        .bg-animation span:nth-child(4) { left: 50%; animation-delay: 0s; width: 15px; height: 15px; }
-        .bg-animation span:nth-child(5) { left: 65%; animation-delay: 3s; }
-        .bg-animation span:nth-child(6) { left: 75%; animation-delay: 5s; width: 25px; height: 25px; }
-        .bg-animation span:nth-child(7) { left: 85%; animation-delay: 7s; }
-        .bg-animation span:nth-child(8) { left: 90%; animation-delay: 1s; width: 35px; height: 35px; }
-        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
-        nav { position: fixed; top: 0; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); }
-        .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { color: #ffffff; text-decoration: none; font-weight: 400; transition: all 0.3s ease; position: relative; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #0a0a0a;
+            color: #ffffff; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 107, 107, 0.3);
+            border-radius: 50%;
+            animation: floatUp 20s infinite;
+        }
+
+        .particle:nth-child(1) { left: 5%; animation-delay: 0s; background: rgba(255, 107, 107, 0.4); }
+        .particle:nth-child(2) { left: 15%; animation-delay: 2s; width: 15px; height: 15px; background: rgba(254, 202, 87, 0.3); }
+        .particle:nth-child(3) { left: 25%; animation-delay: 4s; background: rgba(72, 219, 251, 0.4); }
+        .particle:nth-child(4) { left: 35%; animation-delay: 1s; width: 8px; height: 8px; background: rgba(255, 159, 243, 0.3); }
+        .particle:nth-child(5) { left: 45%; animation-delay: 3s; background: rgba(255, 107, 107, 0.3); }
+        .particle:nth-child(6) { left: 55%; animation-delay: 5s; width: 12px; height: 12px; background: rgba(254, 202, 87, 0.4); }
+        .particle:nth-child(7) { left: 65%; animation-delay: 2.5s; background: rgba(72, 219, 251, 0.3); }
+        .particle:nth-child(8) { left: 75%; animation-delay: 4.5s; width: 6px; height: 6px; background: rgba(255, 159, 243, 0.4); }
+        .particle:nth-child(9) { left: 85%; animation-delay: 1.5s; background: rgba(255, 107, 107, 0.3); }
+        .particle:nth-child(10) { left: 95%; animation-delay: 3.5s; width: 14px; height: 14px; background: rgba(254, 202, 87, 0.3); }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #ff6b6b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logoGradient 5s ease infinite;
+        }
+
+        @keyframes logoGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
         .nav-links a:hover { color: #ff6b6b; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(45deg, #ff6b6b, #feca57); transition: width 0.3s ease; }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            transition: width 0.3s ease;
+        }
+
         .nav-links a:hover::after { width: 100%; }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 20px; }
-        .hero-content h1 { font-size: 4rem; font-weight: 700; margin-bottom: 10px; animation: fadeInUp 1s ease; }
-        .hero-content h1 span { background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-content .tagline { font-size: 1.5rem; color: #888; margin-bottom: 20px; animation: fadeInUp 1s ease 0.2s both; }
-        .hero-content .description { font-size: 1.1rem; color: #aaa; max-width: 600px; margin: 0 auto 40px; line-height: 1.8; animation: fadeInUp 1s ease 0.4s both; }
-        .cta-buttons { display: flex; gap: 20px; justify-content: center; animation: fadeInUp 1s ease 0.6s both; }
-        .btn { padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
-        .btn-primary { background: linear-gradient(45deg, #ff6b6b, #feca57); color: #000; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4); }
-        .btn-secondary { border: 2px solid #fff; color: #fff; }
-        .btn-secondary:hover { background: #fff; color: #000; transform: translateY(-3px); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        section { padding: 100px 50px; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; position: relative; }
-        .section-title::after { content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(45deg, #ff6b6b, #feca57); border-radius: 2px; }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+        }
+
+        .hero-content { max-width: 900px; }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(255, 107, 107, 0.5);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.8rem;
+            color: #888;
+            margin-bottom: 25px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-content .description {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            line-height: 1.9;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.5);
+        }
+
+        .btn-secondary {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #fff;
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-5px);
+            border-color: #fff;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section { padding: 120px 50px; }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 70px;
+        }
+
         #about { background: rgba(255, 255, 255, 0.02); }
-        .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
-        .about-content p { font-size: 1.2rem; line-height: 2; color: #ccc; margin-bottom: 30px; }
-        .skills { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
-        .skill-tag { padding: 10px 25px; background: rgba(255, 255, 255, 0.1); border-radius: 25px; font-size: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; }
-        .skill-tag:hover { background: linear-gradient(45deg, #ff6b6b, #feca57); color: #000; transform: scale(1.05); }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 1; background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-        .gallery-item:hover { transform: translateY(-10px); border-color: #ff6b6b; box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2); }
-        .gallery-placeholder { text-align: center; color: #666; }
-        .gallery-placeholder .emoji { font-size: 4rem; margin-bottom: 15px; }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #ccc;
+            margin-bottom: 35px;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .skill-tag {
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: #000;
+            transform: translateY(-5px) scale(1.05);
+            border-color: transparent;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #ff6b6b;
+            box-shadow: 0 30px 60px rgba(255, 107, 107, 0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-note {
+            text-align: center;
+            margin-top: 60px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .gallery-note a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .gallery-note a:hover { color: #feca57; }
+
         #contact { background: rgba(255, 255, 255, 0.02); }
-        .social-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-        .social-link { display: flex; align-items: center; gap: 15px; padding: 20px 40px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; text-decoration: none; color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-        .social-link:hover { transform: translateY(-5px); border-color: #ff6b6b; background: rgba(255, 107, 107, 0.1); }
-        .social-link svg { width: 30px; height: 30px; }
-        .social-link span { font-weight: 600; }
-        footer { text-align: center; padding: 40px; color: #666; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        @media (max-width: 768px) { nav { padding: 15px 20px; } .nav-links { display: none; } .hero-content h1 { font-size: 2.5rem; } .hero-content .tagline { font-size: 1.2rem; } section { padding: 60px 20px; } .cta-buttons { flex-direction: column; align-items: center; } .social-links { flex-direction: column; align-items: center; } }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 25px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            text-decoration: none;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+        }
+
+        .social-link.giphy:hover {
+            border-color: #00ff99;
+            background: rgba(0, 255, 153, 0.1);
+        }
+
+        .social-link.instagram:hover {
+            border-color: #e1306c;
+            background: rgba(225, 48, 108, 0.1);
+        }
+
+        .social-link.github:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .social-link span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #555;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p { margin-bottom: 10px; }
+        footer .heart { color: #ff6b6b; }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 25px; }
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-content .tagline { font-size: 1.3rem; }
+            .hero-content .description { font-size: 1rem; }
+            section { padding: 80px 25px; }
+            .section-title { font-size: 2.2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; justify-content: center; }
+            .social-links { flex-direction: column; align-items: center; }
+            .social-link { width: 100%; max-width: 300px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <div class="bg-animation"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="bg-gradient"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
     <nav>
         <div class="logo">HAKAN</div>
         <ul class="nav-links">
-            <li><a href="#home">Ana Sayfa</a></li>
-            <li><a href="#about">Hakkımda</a></li>
-            <li><a href="#gallery">Galeri</a></li>
-            <li><a href="#contact">İletişim</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
+
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Merhaba, Ben <span>Hakan</span></h1>
+            <div class="hero-badge">🔥 Meme Creator from Turkey</div>
+            <h1>Hey, I'm <span class="highlight">Hakan</span></h1>
             <p class="tagline">Meme Creator & GIF Artist</p>
-            <p class="description">Turkiye'den bir icerik ureticisiyim. Komik, yaratici ve viral meme'ler & GIF'ler tasarliyorum. Internetin eglenceli tarafini kesfetmeyi ve insanlari guldurmeyi seviyorum!</p>
+            <p class="description">
+                I create funny, creative, and viral memes & GIFs. 
+                I love exploring the fun side of the internet and making people laugh! 
+                Let's spread some joy together. 😂🎬
+            </p>
             <div class="cta-buttons">
-                <a href="https://giphy.com/" class="btn btn-primary" target="_blank">GIPHY Profilim</a>
-                <a href="#gallery" class="btn btn-secondary">Calismalarim</a>
+                <a href="https://giphy.com/channel/user123132123" class="btn btn-primary" target="_blank">
+                    🎬 My GIPHY Profile
+                </a>
+                <a href="#gallery" class="btn btn-secondary">
+                    🖼️ View My Work
+                </a>
             </div>
         </div>
     </section>
+
     <section id="about">
-        <h2 class="section-title">Hakkimda</h2>
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">Digital content creator with a passion for meme culture</p>
         <div class="about-content">
-            <p>Merhaba! Ben Hakan. Dijital icerik uretimi ve meme kulturune tutkuyla bagli bir yaraticiyim. GIF'ler, sticker'lar ve viral meme'ler olusturarak internet dunyasina renk katiyorum.</p>
-            <p>Amacim, insanlarin yuzunde gulumseme birakacak, paylasilabilir ve akilda kalici icerikler uretmek. Her projemde yaraticiligi ve ozgunlugu on planda tutuyorum.</p>
+            <p>
+                Hey there! I'm Hakan, a digital content creator from Turkey. 
+                I'm passionate about meme culture and creating content that makes people smile.
+                From GIFs to stickers to viral memes, I bring color to the internet world.
+            </p>
+            <p>
+                My goal is to create shareable and memorable content that puts a smile on people's faces.
+                I prioritize creativity and originality in every project I work on.
+            </p>
             <div class="skills">
-                <span class="skill-tag">Meme Design</span>
-                <span class="skill-tag">GIF Creation</span>
-                <span class="skill-tag">Sticker Art</span>
-                <span class="skill-tag">Viral Content</span>
-                <span class="skill-tag">Comedy</span>
-                <span class="skill-tag">Pop Culture</span>
+                <span class="skill-tag">🎨 Meme Design</span>
+                <span class="skill-tag">🎬 GIF Creation</span>
+                <span class="skill-tag">✨ Sticker Art</span>
+                <span class="skill-tag">🔥 Viral Content</span>
+                <span class="skill-tag">😂 Comedy</span>
+                <span class="skill-tag">🎭 Pop Culture</span>
             </div>
         </div>
     </section>
+
     <section id="gallery">
-        <h2 class="section-title">Calismalarim</h2>
+        <h2 class="section-title">My Work</h2>
+        <p class="section-subtitle">A collection of my memes, GIFs, and stickers</p>
         <div class="gallery-grid">
-            <div class="gallery-item"><div class="gallery-placeholder"><div class="emoji">🎬</div><p>GIF #1</p></div></div>
-            <div class="gallery-item"><div class="gallery-placeholder"><div class="emoji">😂</div><p>Meme #1</p></div></div>
-            <div class="gallery-item"><div class="gallery-placeholder"><div class="emoji">✨</div><p>Sticker #1</p></div></div>
-            <div class="gallery-item"><div class="gallery-placeholder"><div class="emoji">🔥</div><p>GIF #2</p></div></div>
-            <div class="gallery-item"><div class="gallery-placeholder"><div class="emoji">🎭</div><p>Meme #2</p></div></div>
-            <div class="gallery-item"><div class="gallery-placeholder"><div class="emoji">💫</div><p>Sticker #2</p></div></div>
+            <div class="gallery-item">
+                <img src="https://media.giphy.com/media/brBLnvbm4gmGxW3s6p/giphy.gif" alt="GIF by Hakan">
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.giphy.com/media/JuT0mrpgbDGyyp1R8V/giphy.gif" alt="GIF by Hakan">
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.giphy.com/media/J2HGSRPgzxDVVwbcJo/giphy.gif" alt="GIF by Hakan">
+            </div>
         </div>
-        <p style="text-align: center; margin-top: 40px; color: #888;">Daha fazla icerik icin GIPHY profilimi ziyaret edin!</p>
+        <p class="gallery-note">
+            👉 Check out my full collection on <a href="https://giphy.com/channel/user123132123" target="_blank">GIPHY</a>!
+        </p>
     </section>
+
     <section id="contact">
-        <h2 class="section-title">Iletisim</h2>
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-subtitle">Find me on social media</p>
         <div class="social-links">
-            <a href="https://giphy.com/" class="social-link" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 2v20h8v-8h4v8h8V2H2zm4 4h2v2H6V6zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm12 6h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2z"/></svg>
+            <a href="https://giphy.com/channel/user123132123" class="social-link giphy" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2 2v20h8v-8h4v8h8V2H2zm4 4h2v2H6V6zm0 4h2v2H6v-2zm0 4h2v2H6v-2zm12 6h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2z"/>
+                </svg>
                 <span>GIPHY</span>
             </a>
-            <a href="https://instagram.com/kingbackm1.1" class="social-link" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <a href="https://instagram.com/kingbackm1.1" class="social-link instagram" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
                 <span>Instagram</span>
             </a>
-            <a href="https://github.com/neon2-afk" class="social-link" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <a href="https://github.com/neon2-afk" class="social-link github" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
                 <span>GitHub</span>
             </a>
         </div>
     </section>
+
     <footer>
-        <p>2026 Hakan | Meme Creator</p>
-        <p style="margin-top: 10px;">Made with love</p>
+        <p>© 2026 Hakan | Meme Creator & GIF Artist</p>
+        <p>Made with <span class="heart">❤️</span> and lots of 😂</p>
     </footer>
 </body>
 </html>
